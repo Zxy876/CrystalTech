@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "crystaltech_powders",
+  "ingredients": [
+    { "item": "minecraft:quartz" }
+  ],
+  "result": {
+    "item": "crystaltech:quartz_powder",
+    "count": 1
+  }
+}

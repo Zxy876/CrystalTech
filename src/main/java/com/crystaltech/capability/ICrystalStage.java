@@ -5,7 +5,7 @@ package com.crystaltech.capability;
  */
 public interface ICrystalStage {
     int MIN_STAGE = 0;
-    int MAX_STAGE = 2;
+    int MAX_STAGE = 3;
 
     int getStage();
 

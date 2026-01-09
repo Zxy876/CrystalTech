@@ -23,6 +23,10 @@ public final class CrystalStageApi {
         return get(player).map(ICrystalStage::getStage).orElse(ICrystalStage.MIN_STAGE);
     }
 
+    public static boolean isAtLeast(Player player, int stage) {
+        return getStage(player) >= stage;
+    }
+
     public static boolean tryAdvance(Player player, int targetStage) {
         return get(player).map(capability -> {
             int clamped = Math.min(ICrystalStage.MAX_STAGE, Math.max(ICrystalStage.MIN_STAGE, targetStage));

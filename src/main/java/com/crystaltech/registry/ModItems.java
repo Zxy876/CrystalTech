@@ -14,10 +14,13 @@ import net.minecraftforge.registries.RegistryObject;
 public final class ModItems {
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, CrystalTech.MOD_ID);
 
-    public static final RegistryObject<Item> AMETHYST_ALLOY = ITEMS.register("amethyst_alloy",
+        public static final RegistryObject<Item> AMETHYST_POWDER = ITEMS.register("amethyst_powder",
             () -> new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> CRYSTAL_RECONSTRUCTOR = ITEMS.register("crystal_reconstructor",
+        public static final RegistryObject<Item> QUARTZ_POWDER = ITEMS.register("quartz_powder",
+            () -> new Item(new Item.Properties()));
+
+        public static final RegistryObject<Item> AMETHYST_ALLOY_INGOT = ITEMS.register("amethyst_alloy_ingot",
             () -> new Item(new Item.Properties()));
 
     private ModItems() {
