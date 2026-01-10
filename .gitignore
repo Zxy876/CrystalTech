@@ -33,6 +33,10 @@ crash-reports/
 .DS_Store
 Thumbs.db
 
+# python cache
+__pycache__/
+*.pyc
+
 # generated resources
 src/generated/
 

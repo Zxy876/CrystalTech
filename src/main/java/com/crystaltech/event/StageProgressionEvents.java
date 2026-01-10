@@ -1,7 +1,12 @@
 package com.crystaltech.event;
 
+import java.time.Instant;
+
 import com.crystaltech.CrystalTech;
+import com.crystaltech.capability.intent.PlayerIntentCapability;
 import com.crystaltech.core.CrystalStageApi;
+import com.crystaltech.protocol.ManifestationIntentLogger;
+import com.crystaltech.protocol.ManifestationIntentService;
 import com.crystaltech.registry.ModItems;
 
 import net.minecraft.world.entity.player.Player;
@@ -30,6 +35,27 @@ public final class StageProgressionEvents {
             return;
         }
 
+        Instant now = Instant.now();
+        var lazyIntent = player.getCapability(PlayerIntentCapability.CAPABILITY);
+        var intent = lazyIntent.orElse(null);
+        if (intent == null) {
+            ManifestationIntentLogger.logStageBlocked(player, transition.nextStage(), "intent_capability_missing");
+            return;
+        }
+
+        if (!intent.hasActiveIntent()) {
+            ManifestationIntentLogger.logStageBlocked(player, transition.nextStage(), "manifestation_intent_missing");
+            return;
+        }
+        if (intent.isExpired(now)) {
+            ManifestationIntentLogger.logStageBlocked(player, transition.nextStage(), "manifestation_intent_expired");
+            return;
+        }
+        if (!intent.isStageAllowed(transition.nextStage(), now)) {
+            ManifestationIntentLogger.logStageBlocked(player, transition.nextStage(), "allowed_stage_insufficient");
+            return;
+        }
+
         CrystalTech.LOGGER.debug("Attempting stage transition {} -> {} via crafting for {}", transition.currentStage(), transition.nextStage(), player.getGameProfile().getName());
         boolean advanced = CrystalStageApi.tryAdvance(player, transition.nextStage());
         if (!advanced) {
@@ -37,6 +63,8 @@ public final class StageProgressionEvents {
             return;
         }
 
+        ManifestationIntentService.getInstance().markStageConsumed(player, transition.nextStage(), now);
+        ManifestationIntentLogger.logApplied(player, transition.nextStage());
         CrystalTech.LOGGER.debug("Stage transition complete for {}", player.getGameProfile().getName());
     }
 

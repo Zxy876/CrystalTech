@@ -22,11 +22,13 @@
 - `CrystalStageApi`：
   - 暴露 `advance(ServerPlayer player, CrystalStage stage)`。
   - 每个阶段对应唯一触发条件（参见配方清单）。
+- Manifestation Intent（Plugin权限）与技术行为（Forge）必须双重满足。
 - 触发点：
   1. 工作台配方完成后监听 `PlayerEvent.ItemCraftedEvent`。
   2. 高炉 / 机器完成后在 `BlockEntity` tick 逻辑中判定输出槽。
 - 数据存储：
   - 使用 `Capability` 存储玩家当前阶段。
+  - `PlayerIntentCapability` 记录最新 Manifestation Intent（allowed_stage / 过期时间等）。
   - 写入 `PlayerPersisted` NBT，确保下线保留。
 
 ## 4. 物品注册（List #1）

@@ -118,6 +118,12 @@ crystaltech/
 3. For unit-style logic tests (capabilities, data), integrate with `JUnit` in Gradle if desired.
 4. Before packaging, run `./gradlew build` to produce the mod jar under `build/libs/`.
 
+### City Intent Inbox Linking (Shared Host)
+- `./gradlew runClient` now invokes `scripts/ensure_city_intents_link.sh` automatically. 该脚本会把 `run/city-intents` 指向市民端插件生成信件的目录。
+- 默认插件路径：`../DRIFT_SCIENCELINE/backend/data/ideal_city/protocol/city-intents`。若目录不同，启动前导出 `CITY_INTENT_PLUGIN_PATH=/absolute/path/to/city-intents`。
+- 首次执行会备份旧的 `run/city-intents` 文件夹为 `run/city-intents.backup.<timestamp>`，然后创建符号链接，并确保子目录 `pending/processing/processed/failed` 存在。
+- 确认脚本可执行：`chmod +x scripts/ensure_city_intents_link.sh`（首次拉取仓库后执行一次）。
+
 ## 10. Troubleshooting Tips
 - **Java mismatch:** Ensure `java -version` reports 17.x. Forge 1.20.1 fails on Java 21+.
 - **Gradle daemon memory:** Add `org.gradle.jvmargs=-Xmx4G` to `gradle.properties` if builds exhaust heap.

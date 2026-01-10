@@ -3,6 +3,8 @@ package com.crystaltech.event;
 import com.crystaltech.CrystalTech;
 import com.crystaltech.capability.CrystalStageCapability;
 import com.crystaltech.capability.CrystalStageProvider;
+import com.crystaltech.capability.intent.PlayerIntentCapability;
+import com.crystaltech.capability.intent.PlayerIntentProvider;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -22,9 +24,13 @@ public final class CommonForgeEvents {
     @SubscribeEvent
     public static void onAttachCapabilities(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player) {
-            CrystalStageProvider provider = new CrystalStageProvider();
-            event.addCapability(CrystalStageCapability.KEY, provider);
-            event.addListener(provider::invalidate);
+            CrystalStageProvider stageProvider = new CrystalStageProvider();
+            event.addCapability(CrystalStageCapability.KEY, stageProvider);
+            event.addListener(stageProvider::invalidate);
+
+            PlayerIntentProvider intentProvider = new PlayerIntentProvider();
+            event.addCapability(PlayerIntentCapability.KEY, intentProvider);
+            event.addListener(intentProvider::invalidate);
         }
     }
 
@@ -35,5 +41,8 @@ public final class CommonForgeEvents {
         original.getCapability(CrystalStageCapability.CAPABILITY).ifPresent(oldCap ->
                 clone.getCapability(CrystalStageCapability.CAPABILITY).ifPresent(newCap ->
                         newCap.setStage(oldCap.getStage())));
+        original.getCapability(PlayerIntentCapability.CAPABILITY).ifPresent(oldCap ->
+                clone.getCapability(PlayerIntentCapability.CAPABILITY).ifPresent(newCap ->
+                        newCap.copyFrom(oldCap)));
     }
 }

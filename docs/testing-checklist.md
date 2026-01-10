@@ -14,16 +14,21 @@
 1. 通过指令给予初始材料：
    - `/give @s minecraft:amethyst_shard 5`（若提示未知指令，确认已开启作弊/获得管理员权限）
 2. 切换为生存模式（测试物品消耗）：`/gamemode survival`
-3. **阶段 0 → 阶段 1（工作台推进）**：
+3. **申请 Manifestation Intent（命令调试）**：
+   - 执行 `/crystalintent grant 1`
+   - 期望：终端输出 Intent 记录日志（`Received manifestation intent ...`）
+   - `/data get entity @s ForgeCaps['crystaltech:player_intent']` 可查看允许阶段信息
+   - （可选）手动在 `city-intents/pending/` 投放 JSON 文件验证文件 Inbox：内容遵循文档示例
+4. **阶段 0 → 阶段 1（工作台推进）**：
    - 在工作台放入 1 个 `minecraft:amethyst_shard`（或 `minecraft:quartz`），合成对应粉末
    - 结果：获得 `Amethyst Powder` 或 `Quartz Powder`
    - 验证：
-      - 控制台日志出现阶段变更调试信息
+      - 控制台日志出现阶段变更调试信息与 `Applied manifestation allowance`
       - `/data get entity @s ForgeCaps['crystaltech:crystal_stage']` 返回 `1`
-4. **重复触发保护**：
-   - 保持阶段 1，再次合成粉末
-   - 期望：阶段保持 1，日志提示拒绝推进
-5. **阶段 1 → 阶段 2（占位，Milestone 2 完成后执行）**：
+5. **重复触发保护**：
+   - 保持阶段 1（无新的 Intent），再次合成粉末
+   - 期望：阶段保持 1，日志提示 `manifestation_intent_missing`
+6. **阶段 1 → 阶段 2（占位，Milestone 2 完成后执行）**：
    - 待紫晶熔炉实装后，通过机器输出验证推进逻辑
    - 当前版本：确认日志提示“未实现”或无推进
 

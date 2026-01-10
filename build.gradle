@@ -205,3 +205,21 @@ publishing {
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
+def ensureCityIntentsLink = tasks.register('ensureCityIntentsLink') {
+    group = 'crystaltech'
+    description = 'Ensure run/city-intents points at the plugin inbox before launching the client'
+
+    doLast {
+        project.exec {
+            executable 'bash'
+            args new File(project.projectDir, 'scripts/ensure_city_intents_link.sh').absolutePath
+        }
+    }
+}
+
+tasks.whenTaskAdded { task ->
+    if (task.name == 'runClient') {
+        task.dependsOn(ensureCityIntentsLink)
+    }
+}
+
