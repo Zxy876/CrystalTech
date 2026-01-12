@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "crystaltech:amethyst_powder"
+  },
+  "result": "crystaltech:amethyst_alloy_ingot",
+  "experience": 0.1,
+  "cookingtime": 200
+}

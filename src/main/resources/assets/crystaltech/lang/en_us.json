@@ -1,5 +1,13 @@
 {
   "item.crystaltech.amethyst_powder": "Amethyst Powder",
   "item.crystaltech.quartz_powder": "Quartz Powder",
-  "item.crystaltech.amethyst_alloy_ingot": "Amethyst Alloy Ingot"
+  "item.crystaltech.amethyst_alloy_ingot": "Amethyst Alloy Ingot",
+  "item.crystaltech.amethyst_alloy_pickaxe": "Amethyst Alloy Pickaxe",
+  "item.crystaltech.amethyst_alloy_sword": "Amethyst Alloy Sword",
+  "block.crystaltech.amethyst_furnace": "Amethyst Furnace",
+  "block.crystaltech.amethyst_bricks": "Amethyst Bricks",
+  "screen.crystaltech.amethyst_furnace": "Amethyst Furnace",
+  "screen.crystaltech.amethyst_furnace.multiblock": "Structure stabilized",
+  "screen.crystaltech.amethyst_furnace.multiblock_missing": "Structure incomplete",
+  "tooltip.crystaltech.energy": "%s / %s FE"
 }

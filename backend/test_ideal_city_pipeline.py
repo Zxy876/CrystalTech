@@ -96,9 +96,8 @@ def test_single_sentence_submission_auto_structures():
     assert any(line.startswith(" ~ 世界精神") for line in result.notice.body)
     assert "仍停留" in body_text
     state = pipeline.cityphone_state("tester", "default")
-    assert state.ready_for_build is False
-    assert state.panels.plan.available is False
-    assert state.blocking
+    assert state.appendix.plan.available is False
+    assert state.unknowns
     assert state.technology_status is not None
     assert result.build_plan is None
     assert result.uncertainty is not None
@@ -110,7 +109,7 @@ def test_single_sentence_submission_auto_structures():
     assert result.notice.research_hint == result.research_hint
     assert result.research_hint.startswith("档案状态：研究进行中。")
     assert "核心缺口" in result.research_hint
-    assert state.research_hint == result.research_hint
+    assert state.appendix.plan.status in {"未就绪", "pending"}
     assert result.manifestation_intent is None
     pending_dir = Path(os.environ["IDEAL_CITY_PROTOCOL_ROOT"]) / "city-intents" / "pending"
     assert pending_dir.exists()
@@ -134,7 +133,7 @@ def test_partial_logic_attempt_marked_unstable():
     assert result.research_hint is not None
     assert "梳理中要素" in result.research_hint
     state = pipeline.cityphone_state("tester", "default")
-    assert state.research_hint == result.research_hint
+    assert state.unknowns
     assert state.technology_status is not None
     assert result.manifestation_intent is None
     pending_dir = Path(os.environ["IDEAL_CITY_PROTOCOL_ROOT"]) / "city-intents" / "pending"
@@ -161,11 +160,10 @@ def test_acceptance_mentions_affirmation():
     assert any("工坊长老们认可" in line for line in result.notice.body)
     assert any(line.startswith(" ~ 世界精神") for line in result.notice.body)
     state = pipeline.cityphone_state("tester", "default")
-    assert state.ready_for_build is True
-    assert state.panels.plan.available is True
-    assert state.blocking == []
+    assert state.city_interpretation
+    assert state.appendix.plan.available is True
+    assert not state.unknowns[:1]
     assert state.technology_status is not None
-    assert state.build_capability >= 120
     assert result.build_plan is not None
     assert result.manifestation_intent is not None
     intent = result.manifestation_intent

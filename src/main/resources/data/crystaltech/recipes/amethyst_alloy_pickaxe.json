@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "conditions": [
+    {
+      "type": "crystaltech:stage_unlocked",
+      "stage": 2
+    }
+  ],
+  "pattern": [
+    "AAA",
+    " S ",
+    " S "
+  ],
+  "key": {
+    "A": {
+      "item": "crystaltech:amethyst_alloy_ingot"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  ],
+  "result": {
+    "item": "crystaltech:amethyst_alloy_pickaxe"
+  }
+}

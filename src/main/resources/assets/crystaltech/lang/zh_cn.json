@@ -1,5 +1,13 @@
 {
   "item.crystaltech.amethyst_powder": "紫水晶粉",
   "item.crystaltech.quartz_powder": "石英粉",
-  "item.crystaltech.amethyst_alloy_ingot": "紫晶合金锭"
+  "item.crystaltech.amethyst_alloy_ingot": "紫晶合金锭",
+  "item.crystaltech.amethyst_alloy_pickaxe": "紫晶合金镐",
+  "item.crystaltech.amethyst_alloy_sword": "紫晶合金剑",
+  "block.crystaltech.amethyst_furnace": "紫晶熔炉",
+  "block.crystaltech.amethyst_bricks": "紫晶砖块",
+  "screen.crystaltech.amethyst_furnace": "紫晶熔炉",
+  "screen.crystaltech.amethyst_furnace.multiblock": "结构已联动",
+  "screen.crystaltech.amethyst_furnace.multiblock_missing": "结构未完成",
+  "tooltip.crystaltech.energy": "%s / %s FE"
 }
